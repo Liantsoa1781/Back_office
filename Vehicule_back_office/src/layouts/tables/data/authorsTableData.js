@@ -4,9 +4,8 @@ import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 import team2 from "assets/images/team-2.jpg";
 import React, { useState, useEffect } from "react";
-import Axios from "axios"; 
-
-
+import PropTypes from "prop-types";
+import Axios from "axios";
 export default function data() {
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -19,6 +18,11 @@ export default function data() {
       </MDBox>
     </MDBox>
   );
+  Author.propTypes = {
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  };
 
   const Job = ({ title, description }) => (
     <MDBox lineHeight={1} textAlign="left">
@@ -28,6 +32,10 @@ export default function data() {
       <MDTypography variant="caption">{description}</MDTypography>
     </MDBox>
   );
+  Job.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  };
   const [annonces, setAnnonces] = useState([]);
 
   useEffect(() => {
@@ -36,35 +44,44 @@ export default function data() {
         const response = await Axios.get("http://localhost:1817/api/annonce/accepte_annonce/3");
         const data = response.data;
 
-        const rowsData = await Promise.all(data.map(async (annonceItem) => {
-          const utilisateurResponse = await Axios.get(`http://localhost:1817/api/user/id_utilisateur/${annonceItem.id_utilisateur}`);
-          const voitureResponse = await Axios.get(`http://localhost:1817/api/voiture/${annonceItem.id_voiture}`);
-          const utilisateurNom = utilisateurResponse.data.nom;
-          const id_marque = voitureResponse.data.id_marque;
-          
-          const marqueResponse = await Axios.get(`http://localhost:1817/api/marque/${id_marque}`);
-          const nom_marque = marqueResponse.data.nom_marque;
+        const rowsData = await Promise.all(
+          data.map(async (annonceItem) => {
+            const utilisateurResponse = await Axios.get(
+              `http://localhost:1817/api/user/id_utilisateur/${annonceItem.id_utilisateur}`
+            );
+            const voitureResponse = await Axios.get(`http://localhost:1817/api/voiture/
+            ${annonceItem.id_voiture}`);
+            const utilisateurNom = utilisateurResponse.data.nom;
+            const id_marque = voitureResponse.data.id_marque;
+            const marqueResponse = await Axios.get(`http://localhost:1817/api/marque/${id_marque}`);
+            const nom_marque = marqueResponse.data.nom_marque;
 
-          return {
-            annonce: <Author image={team2} name={utilisateurNom} email={nom_marque} />,
-            status: (
-              <MDBox ml={-1}>
-                <MDBadge badgeContent="Valider" color="success" variant="gradient" size="sm" />
-              </MDBox>
-            ),
-            employed: (
-              <MDBox ml={-1}>
-                <MDBadge badgeContent="Decliner" color="dark" variant="gradient" size="sm" />
-              </MDBox>
-            ),
-            action: (
-              <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-                Edit
-              </MDTypography>
-            ),
-          };
-        }));
-
+            return {
+              annonce: <Author image={team2} name={utilisateurNom} email={nom_marque} />,
+              status: (
+                <MDBox ml={-1}>
+                  <MDBadge badgeContent="Valider" color="success" variant="gradient" size="sm" />
+                </MDBox>
+              ),
+              employed: (
+                <MDBox ml={-1}>
+                  <MDBadge badgeContent="Decliner" color="dark" variant="gradient" size="sm" />
+                </MDBox>
+              ),
+              action: (
+                <MDTypography
+                  component="a"
+                  href="#"
+                  variant="caption"
+                  color="text"
+                  fontWeight="medium"
+                >
+                  Edit
+                </MDTypography>
+              ),
+            };
+          })
+        );
         setAnnonces(rowsData);
       } catch (error) {
         console.error("Error fetching data:", error);

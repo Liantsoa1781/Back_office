@@ -84,23 +84,23 @@ function Basic() {
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
-          <MDBox mb={2}>
-            <MDInput
-              type="email"
-              label="Email"
-              fullWidth
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </MDBox>
+            <MDBox mb={2}>
+              <MDInput
+                type="email"
+                label="Email"
+                fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </MDBox>
 
             <MDBox mb={2}>
               <MDInput
-              type="password"
-              label="Password"
-              fullWidth
-              value={mdp}
-              onChange={(e) => setMdp(e.target.value)}
+                type="password"
+                label="Password"
+                fullWidth
+                value={mdp}
+                onChange={(e) => setMdp(e.target.value)}
               />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
@@ -126,7 +126,9 @@ function Basic() {
               ) : loginStatus ? (
                 <p>Connexion réussie!</p>
               ) : (
-                <p>Échec de la connexion. Veuillez vérifier vos informations d'identification.</p>
+                <p>
+                  Échec de la connexion. Veuillez vérifier vos informations d&apos;identification.
+                </p>
               )}
             </div>
             <MDBox mt={3} mb={1} textAlign="center">
