@@ -13,6 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import { Link, useNavigate } from "react-router-dom";
+
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -38,15 +40,19 @@ function PaymentMethod() {
   return (
     <Card id="delete-account">
       <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
-        <MDTypography variant="h6" fontWeight="medium">
-          Payment Method
-        </MDTypography>
-        <MDButton variant="gradient" color="dark">
+        <MDTypography
+          component={Link}
+          to="/components/ajouterMarque"
+          variant="button"
+          color="dark"
+          fontWeight="medium"
+          textGradient
+        >
           <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-          &nbsp;add new card
-        </MDButton>
+          &nbsp;Ajouter une marque
+        </MDTypography>
       </MDBox>
-      <MDBox p={2}>
+      <MDBox p={1}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <MDBox
@@ -66,13 +72,39 @@ function PaymentMethod() {
               </MDTypography>
               <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
                 <Tooltip title="Edit Card" placement="top">
-                  <Icon sx={{ cursor: "pointer" }} fontSize="small">
-                    edit
-                  </Icon>
+                  <MDTypography
+                    component={Link}
+                    to="/components/ajouterCategorie"
+                    variant="button"
+                    color="dark"
+                    fontWeight="medium"
+                    textGradient
+                  >
+                    <Icon sx={{ cursor: "pointer" }} fontSize="small">
+                      edit
+                    </Icon>
+                  </MDTypography>
                 </Tooltip>
               </MDBox>
             </MDBox>
           </Grid>
+        </Grid>
+      </MDBox>
+      <MDBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+        <MDTypography
+          component={Link}
+          to="/components/ajoutCategorie"
+          variant="button"
+          color="dark"
+          fontWeight="medium"
+          textGradient
+        >
+          <Icon sx={{ fontWeight: "bold" }}>add</Icon>
+          &nbsp;Ajouter une categorie
+        </MDTypography>
+      </MDBox>
+      <MDBox p={1}>
+        <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <MDBox
               borderRadius="lg"
@@ -91,9 +123,18 @@ function PaymentMethod() {
               </MDTypography>
               <MDBox ml="auto" lineHeight={0} color={darkMode ? "white" : "dark"}>
                 <Tooltip title="Edit Card" placement="top">
-                  <Icon sx={{ cursor: "pointer" }} fontSize="small">
-                    edit
-                  </Icon>
+                  <MDTypography
+                    component={Link}
+                    to="/examples/ajouterMarque"
+                    variant="button"
+                    color="dark"
+                    fontWeight="medium"
+                    textGradient
+                  >
+                    <Icon sx={{ cursor: "pointer" }} fontSize="small">
+                      edit
+                    </Icon>
+                  </MDTypography>
                 </Tooltip>
               </MDBox>
             </MDBox>
